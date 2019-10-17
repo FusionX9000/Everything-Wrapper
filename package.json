@@ -1,0 +1,22 @@
+{
+  "name": "everything-wrapper",
+  "version": "1.0.0",
+  "description": "Better UI for Everything Search over web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FusionX9000/Everything-Wrapper.git"
+  },
+  "author": "Salman Ahmad Khan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FusionX9000/Everything-Wrapper/issues"
+  },
+  "homepage": "https://github.com/FusionX9000/Everything-Wrapper#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

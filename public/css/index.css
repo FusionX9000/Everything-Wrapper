@@ -1,0 +1,103 @@
+body {
+    background-color: #292929;
+    line-height: 1.6em;
+    color: #f4f4f4;
+    font-family: monospace, sans-serif;
+    font-size: 14px;
+    margin: 0;
+    text-decoration: none;
+}
+
+body a {
+    text-decoration: none;
+    color: inherit;
+}
+
+header {
+    background-color: #0f0f13;
+    padding: 10px;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    color: white;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 5px;
+    font-family: monospace, sans-serif;
+    font-size: inherit;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display:flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+button {
+    color: inherit;
+    font: inherit;
+    width:100px;
+    text-align: center;
+    border: 2px solid #f4f4f4;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+button:hover {
+    border: 2px solid black;
+    color: black;
+    background-color: #f4f4f4;
+    transition: all 0.3s ease 0s;
+}
+
+#main {
+    margin: 50px 0px;
+}
+
+.results-container {
+    overflow-x: auto;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: #bebebe;
+    color: black;
+}
+
+#results {
+    overflow-x: auto;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#results tbody td, #results thead th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#results tbody tr:nth-child(odd){background-color: #f2f2f2;}
+
+#results thead th {
+    background-color: black;
+    color: white;
+}
+
+#results tbody img {
+    max-height:200px;
+    max-width: 320px;
+}
+
+#next, #prev {
+    display: none;
+    margin: 10px 0px;
+}
+

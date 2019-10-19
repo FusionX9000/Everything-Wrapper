@@ -7,9 +7,11 @@ var prev = -count;
 
 const nextButtons = document.querySelectorAll("#next");
 const prevButtons = document.querySelectorAll("#prev");
+const countHeader = document.querySelector("#count");
 
 document.getElementById("search").addEventListener("click", e => {
   e.preventDefault();
+  countHeader.style.display = "block";
   search = document.getElementById("searchText").value;
 
   getResults(`${URL}:5000`, search, count, 0, results => {
@@ -46,7 +48,8 @@ const getResults = (url, search, count, offset, cb) => {
     })
     .then(json => {
       prev = offset - count;
-      next = offset + Math.min(json.totalResults, count);
+      next = Math.min(json.totalResults,offset + count);
+      countHeader.innerText = `${next} out of ${json.totalResults} results`;
       cb({
         results: json.results,
         totalCount: json.totalResults,
@@ -83,27 +86,35 @@ const isImage = filename => {
 
 const getFileTag = (filename, src) => {
   if (isImage(filename)) {
-    return `<img src="${src}">`;
+    let a = document.createElement("a");
+    a.setAttribute("href", src);
+    a.setAttribute("target", "_blank");
+    a.innerHTML = `<img src="${src}">`
+    return a;
   } else if (isVideo(filename)) {
-    return `<video width="320" height="240" controls>
-    <source src="${src}#t=15" type="video/mp4">
-  </video>`;
+    let video = document.createElement("video");
+    video.setAttribute("width", 320);
+    video.setAttribute("height", 240);
+    video.setAttribute("loop", '');
+    video.setAttribute("controls", '');
+    video.innerHTML = `<source src="${src}#t=0.1" type="video/mp4">`;
+    return video;
+  } else {
+    return undefined;
   }
 };
 
 const addResult = result => {
   let tableRef = document.querySelector("#results").querySelector("tbody");
-  let newRow = tableRef.insertRow();
 
   let path = `${URL}/${result.path.split("\\").join("/")}`;
   let src = path + "/" + result.name;
-  let a = document.createElement("a");
-  a.setAttribute("href", src);
-  a.setAttribute("target", "_blank");
-  // a.innerHTML = `<img src="${src}">`;
-  a.innerHTML = getFileTag(result.name, src);
 
-  newRow.insertCell(0).appendChild(a);
+  var fileHTML = getFileTag(result.name, src);
+  if (fileHTML === undefined) return;
+
+  let newRow = tableRef.insertRow();
+  newRow.insertCell(0).appendChild(fileHTML);
 
   a = document.createElement("a");
   a.setAttribute("href", path);
@@ -127,20 +138,20 @@ const setResults = results => {
   document.querySelector("tbody").innerHTML = "";
   if (next >= count && next < results.totalCount) {
     nextButtons.forEach(nextButton => {
-      nextButton.style.display = "inline-block";
+      nextButton.style.visibility = "visible";
     });
   } else {
     nextButtons.forEach(nextButton => {
-      nextButton.style.display = "none";
+      nextButton.style.visibility = "hidden";
     });
   }
   if (prev >= 0) {
     prevButtons.forEach(prevButton => {
-      prevButton.style.display = "inline-block";
+      prevButton.style.visibility = "visible";
     });
   } else {
     prevButtons.forEach(prevButton => {
-      prevButton.style.display = "none";
+      prevButton.style.visibility = "hidden";
     });
   }
   results.results.forEach(result => addResult(result));

@@ -59,6 +59,7 @@ button:hover {
     color: black;
     background-color: #f4f4f4;
     transition: all 0.3s ease 0s;
+    transition: visibility 0s;
 }
 
 #main {
@@ -96,8 +97,18 @@ button:hover {
     max-width: 320px;
 }
 
+.index-container {
+    display:flex;
+    justify-content: space-between;
+}
+
 #next, #prev {
-    display: none;
+    /* display: none; */
+    visibility: hidden;
     margin: 10px 0px;
+}
+
+#count {
+    display: none;
 }
 
